@@ -242,3 +242,552 @@ The **SRE (Site Reliability Engineering)** discipline focuses on reliability, sc
 - **Resource Exhaustion**: Monitor CPU, memory, or disk usage only if they impact service performance.
 
 By combining these **RCA** and **SRE principles**, alerts can be made more effective, ensuring they are actionable, minimize noise, and focus on the metrics that impact the overall reliability of the system.
+
+## 4. How you will achieve the DB high availability and fault tolerance?
+
+- **Answer:**
+
+Achieving **high availability** and **fault tolerance** for a database in AWS requires leveraging a combination of AWS services, configurations, and best practices. Here’s a detailed approach to ensure that your database is highly available and fault-tolerant:
+
+### 1. **Use Managed Database Services (AWS RDS, Aurora)**
+   - **AWS RDS** (Relational Database Service) and **Amazon Aurora** are managed services that provide built-in features for high availability and fault tolerance. These services automate routine database tasks like backups, patching, and scaling, allowing you to focus on your application.
+
+   #### Key Strategies for RDS/Aurora:
+   - **Multi-AZ Deployment**: Enable Multi-AZ (Availability Zone) for your database. This creates a synchronous standby replica in another AZ, ensuring that if the primary instance fails, the standby takes over automatically.
+     - **Automatic failover**: If a failure occurs (hardware failure, network issues, etc.), AWS automatically promotes the standby to become the new primary without manual intervention.
+     - **Replication**: Multi-AZ replication is synchronous, ensuring the standby is always up-to-date with the primary.
+   - **Aurora Replicas**: Aurora supports **up to 15 replicas** across multiple AZs. It provides **auto-failover** by promoting one of the replicas to primary if the current primary instance fails.
+     - **Aurora Global Databases**: For cross-region high availability, Aurora Global Databases allow replication across regions with low latency, ensuring disaster recovery and read availability in multiple regions.
+
+### 2. **Leverage Amazon DynamoDB for NoSQL Databases**
+   - **DynamoDB** is a fully managed NoSQL database with built-in high availability and fault tolerance.
+   - **Multi-AZ replication**: DynamoDB replicates data across multiple Availability Zones automatically, ensuring that your application remains available even if an AZ goes down.
+   - **Global Tables**: For fault tolerance across regions, use **DynamoDB Global Tables**, which replicate your data across multiple AWS regions, allowing for fast failover and disaster recovery.
+
+### 3. **Cross-Region Replication for Disaster Recovery**
+   - For **RDS**, you can enable **read replicas** in different regions, which can be promoted to primary in the event of a regional failure.
+     - **RDS Read Replicas**: Create **cross-region read replicas** to ensure that your data is asynchronously replicated to a different region. This provides a disaster recovery option in case the entire region is unavailable.
+     - For **Aurora**, use **Aurora Global Database** to replicate across regions with a replication lag of under one second. If your primary region fails, you can promote the standby region in under a minute.
+
+### 4. **Backups and Snapshots**
+   - **Automated Backups**: AWS RDS automatically creates backups and stores them in S3. In case of failure or corruption, you can restore your database to any point in time within the backup retention window.
+   - **Manual Snapshots**: In addition to automated backups, you can take manual snapshots, which are useful for long-term storage or to keep backup versions before applying major changes.
+   - **Cross-region backups**: Enable cross-region snapshot copy to store backups in a different region, which helps in disaster recovery situations.
+
+### 5. **Load Balancing and Read Scaling**
+   - For read-heavy applications, you can **distribute read traffic** across multiple replicas to reduce the load on the primary database.
+   - **Aurora Auto-Scaling**: Aurora allows read replicas to auto-scale based on demand, ensuring that your database can handle sudden spikes in traffic without downtime.
+   - **RDS Read Replicas**: You can create **read replicas** in the same or different regions, distributing read requests and offloading traffic from the primary instance.
+
+### 6. **Use Elastic Block Store (EBS) Optimized Instances**
+   - If you're using **self-managed databases on EC2**, ensure the underlying storage is highly available.
+   - **Amazon EBS** provides durable block storage and automatically replicates data across multiple physical devices within an AZ, ensuring data durability and fault tolerance.
+   - **EBS snapshots**: You can take regular EBS snapshots and store them in S3. In case of a failure, you can restore your database from these snapshots.
+   - **EBS Multi-Attach**: In some scenarios, you can use **EBS Multi-Attach** to allow multiple EC2 instances to concurrently access a single EBS volume, providing failover options for critical applications.
+
+### 7. **Self-Managed Databases on EC2 Instances**
+   - If you're managing your own database on EC2 instances, you need to configure high availability and fault tolerance manually.
+   
+   #### Key Strategies:
+   - **Replication**: Set up database replication to replicate data across multiple EC2 instances in different AZs. Use **synchronous replication** for high availability and **asynchronous replication** for disaster recovery across regions.
+   - **Load Balancers**: Use **Elastic Load Balancing (ELB)** or **Route 53** for health checks and automatic failover between EC2 instances in case one goes down.
+   - **Failover with Heartbeat and Pacemaker**: Configure a **failover cluster** using tools like **Heartbeat** or **Pacemaker** to monitor the primary database instance and automatically promote a standby if the primary fails.
+   - **Elastic IP or DNS Failover**: Use an **Elastic IP address** or DNS failover with **Amazon Route 53** to ensure that traffic is directed to the correct instance, even after a failover.
+
+### 8. **Monitoring and Alerts**
+   - **CloudWatch Alarms**: Set up **Amazon CloudWatch** to monitor database performance and automatically trigger alerts or scaling actions based on metrics like CPU usage, disk I/O, or replication lag.
+   - **Health Checks**: Use **Route 53 health checks** or **ELB health checks** to monitor the availability of your database. If the health check fails, traffic can be redirected to a healthy standby or replica.
+   - **RDS Event Notifications**: Enable **RDS event notifications** to receive alerts about failovers, backup completions, or replication issues.
+
+### 9. **Database Failover Strategies**
+   - Ensure that a proper **failover strategy** is in place to minimize downtime during failures.
+   - For **RDS** with Multi-AZ enabled, failover happens automatically without manual intervention. For **Aurora**, the failover time is typically under 30 seconds.
+   - If you're managing databases manually, use **automated scripts or systems** (e.g., Pacemaker, custom Lambda scripts) to promote a standby replica during failure.
+
+### 10. **Network Configuration**
+   - Use **VPC peering** or **Transit Gateway** for private network connectivity between databases and application servers, ensuring network resilience and fault tolerance.
+   - Ensure **subnets** are spread across multiple AZs to avoid single points of failure.
+   - **PrivateLink**: For cross-VPC or service communication, use AWS **PrivateLink** for low-latency, fault-tolerant connections without exposing traffic to the public internet.
+
+### 11. **Security Considerations**
+   - **Encrypt data at rest and in transit** using AWS Key Management Service (KMS) to ensure that database data is secure, even during a failover event.
+   - Use **IAM roles and security groups** to limit access and ensure secure connectivity between application and database layers.
+
+---
+
+### Summary of Key Strategies for DB High Availability and Fault Tolerance in AWS:
+1. **AWS RDS/Aurora Multi-AZ Deployments** for automatic failover and high availability.
+2. **Aurora Global Databases** and **DynamoDB Global Tables** for cross-region disaster recovery.
+3. **Read Replicas** in the same or different regions for read scaling and fault tolerance.
+4. **EBS Snapshots** and **Cross-Region Backups** for fast recovery and long-term durability.
+5. **CloudWatch Monitoring** and **Route 53 Health Checks** for proactive monitoring and alerting.
+6. **Failover Strategies** with automated promotion of standby instances or replicas.
+
+By combining these AWS services and strategies, you can build a highly available and fault-tolerant database architecture capable of handling regional failures, application demands, and infrastructure issues.
+
+## 5. What is jenkins and security tools?
+
+- **Answer:**
+
+### **Jenkins Overview**
+**Jenkins** is an open-source automation server widely used for **Continuous Integration (CI)** and **Continuous Delivery (CD)**. It helps automate various stages of software development, such as building, testing, and deploying applications. Jenkins integrates with many tools and platforms, making it a central component in DevOps pipelines.
+
+#### **Key Features of Jenkins:**
+- **Automation**: Jenkins automates repetitive tasks like code building, testing, and deployment.
+- **Plugins**: Jenkins has over 1,800 plugins, allowing integration with various tools for source control (e.g., Git), build tools (e.g., Maven), testing frameworks, security tools, etc.
+- **Distributed Builds**: Jenkins can distribute tasks across multiple machines, speeding up builds and tests.
+- **Extensibility**: It's highly configurable and can be extended with custom plugins or scripts.
+
+#### **How Jenkins Works:**
+1. **Source Code Control Integration**: Jenkins can be connected to version control systems (e.g., Git, SVN). When code is pushed or committed, it can trigger builds or tests automatically.
+2. **Build Automation**: Jenkins can execute build tools like Maven, Gradle, or Ant to compile code, run tests, and package the application.
+3. **Test Automation**: Jenkins integrates with various testing frameworks (e.g., JUnit, Selenium) to automatically run tests and ensure code quality.
+4. **Continuous Deployment**: After successful builds and tests, Jenkins can deploy the application to different environments, such as development, staging, or production.
+
+#### **Typical Use Cases**:
+- **Automated Builds**: Every time code is committed, Jenkins triggers a build, reducing the need for manual builds.
+- **Continuous Testing**: It automatically runs unit tests, integration tests, and UI tests on every code change.
+- **Deployment Pipelines**: Jenkins pipelines automate the entire software delivery lifecycle, from code commit to deployment.
+  
+---
+
+### **Security Tools in Jenkins**
+
+To maintain a secure CI/CD pipeline in Jenkins, various **security tools** and practices are employed to ensure that the system is protected against vulnerabilities and that the software being developed is secure. These tools can be integrated into Jenkins to automate security checks throughout the software development lifecycle.
+
+#### **Key Security Tools for Jenkins Integration**:
+
+1. **Static Application Security Testing (SAST) Tools**
+   - **Purpose**: To detect security vulnerabilities in the source code by analyzing the codebase without executing it.
+   - **Examples**:
+     - **SonarQube**: A popular code quality and security tool that can be integrated with Jenkins to scan for issues such as vulnerabilities, bugs, and code smells.
+     - **Checkmarx**: An advanced SAST tool for identifying security vulnerabilities in the codebase.
+     - **Fortify**: Another tool for static code analysis, helping detect security vulnerabilities during early development stages.
+
+2. **Dynamic Application Security Testing (DAST) Tools**
+   - **Purpose**: To find vulnerabilities in running applications by simulating real-world attacks.
+   - **Examples**:
+     - **OWASP ZAP**: An open-source tool used for penetration testing and identifying security issues in web applications. It can be integrated into Jenkins to run automated scans.
+     - **Burp Suite**: A comprehensive DAST tool for security testing of web applications.
+     - **Arachni**: Another security tool that scans for vulnerabilities in web applications.
+
+3. **Software Composition Analysis (SCA) Tools**
+   - **Purpose**: To identify vulnerabilities in third-party libraries and dependencies.
+   - **Examples**:
+     - **Snyk**: A tool that integrates with Jenkins to scan open-source dependencies and container images for known vulnerabilities.
+     - **WhiteSource**: Helps detect vulnerabilities in open-source components.
+     - **Dependabot**: Automatically detects vulnerabilities in dependencies and creates pull requests with patches.
+
+4. **Container Security Tools**
+   - **Purpose**: To secure containers and ensure that images are free of vulnerabilities before deployment.
+   - **Examples**:
+     - **Clair**: A tool for static analysis of vulnerabilities in Docker and OCI images.
+     - **Anchore**: Integrates with Jenkins to perform container image scanning and vulnerability analysis.
+     - **Aqua Security**: Provides a security solution for containerized environments and can be integrated into Jenkins pipelines.
+
+5. **Infrastructure as Code (IaC) Security**
+   - **Purpose**: To detect misconfigurations and vulnerabilities in infrastructure code, such as Terraform, CloudFormation, or Ansible.
+   - **Examples**:
+     - **Checkov**: A tool for scanning IaC files for security issues and misconfigurations.
+     - **TerraScan**: Scans infrastructure as code templates for security vulnerabilities.
+     - **TFLint**: A security linting tool specifically for Terraform code.
+
+6. **Secrets Management Tools**
+   - **Purpose**: To ensure sensitive information (e.g., API keys, passwords) is securely handled.
+   - **Examples**:
+     - **HashiCorp Vault**: A tool for securely storing and managing secrets and credentials that can be integrated into Jenkins pipelines.
+     - **AWS Secrets Manager**: Manage secrets within AWS, and Jenkins can be configured to retrieve these securely during the build process.
+
+7. **Vulnerability Management Tools**
+   - **Purpose**: To scan applications and infrastructure for known vulnerabilities.
+   - **Examples**:
+     - **Nessus**: A comprehensive vulnerability scanner for infrastructure, which can be used in Jenkins for regular security scans.
+     - **Qualys**: Provides vulnerability management solutions that integrate into Jenkins for automated scans.
+     - **OpenVAS**: An open-source tool that integrates with Jenkins to perform vulnerability assessments.
+
+8. **Identity and Access Management (IAM)**
+   - **Purpose**: To ensure secure and controlled access to Jenkins and related infrastructure.
+   - **Examples**:
+     - **LDAP/Active Directory Integration**: Jenkins can be integrated with LDAP or Active Directory for role-based access control (RBAC), ensuring that only authorized users can access or modify pipelines.
+     - **Jenkins RBAC Plugin**: Allows fine-grained access control in Jenkins, restricting who can trigger builds or view logs.
+
+---
+
+### **Best Practices for Securing Jenkins**:
+1. **Role-Based Access Control (RBAC)**: Use Jenkins' built-in security or external authentication (e.g., LDAP, Active Directory) to ensure only authorized users have access to critical pipelines.
+2. **Secure Credentials**: Use Jenkins’ **Credential Manager** to securely store passwords, API tokens, and secrets. Avoid hardcoding secrets into pipelines.
+3. **Pipeline Security**: Implement **SAST** and **DAST** security scans directly in your CI/CD pipeline to catch security vulnerabilities early in development.
+4. **Audit Logs**: Enable **audit logs** in Jenkins to track who performed what actions in the system, ensuring transparency and accountability.
+5. **Regular Updates**: Ensure Jenkins and all plugins are regularly updated to patch security vulnerabilities.
+6. **Use SSL/TLS**: Secure the Jenkins dashboard and API communication with SSL/TLS to prevent man-in-the-middle attacks.
+7. **Container and Infrastructure Security**: Ensure the underlying infrastructure and containers used in the pipeline are free from vulnerabilities by regularly scanning them.
+
+---
+
+### Summary:
+- **Jenkins** is a widely used automation server for CI/CD pipelines, helping streamline development, testing, and deployment processes.
+- **Security tools** like **SAST**, **DAST**, **SCA**, and **secrets management** can be integrated with Jenkins to ensure the application, infrastructure, and pipeline are secure from vulnerabilities and threats.
+- Following **best practices** for securing Jenkins itself is critical to ensuring your CI/CD pipeline and the broader development lifecycle are protected from security risks.
+
+## 6. How docker is integrated in jenkins?
+
+- **Answer:**
+
+Integrating **Docker** with **Jenkins** enhances your CI/CD pipeline by allowing you to build, test, and deploy containerized applications seamlessly. This integration helps in creating consistent development environments and streamlining deployment processes. Here’s a detailed overview of how Docker can be integrated into Jenkins:
+
+### **1. Jenkins Docker Plugin**
+
+**Jenkins Docker Plugin** provides the core functionality to integrate Docker with Jenkins. Here’s how you can use it:
+
+- **Installation**: Install the **Docker Plugin** from the Jenkins Plugin Manager.
+- **Configuration**:
+  - **Docker Cloud Configuration**: Go to **Manage Jenkins** > **Configure System**, and add Docker Cloud configurations to connect Jenkins to your Docker environment.
+  - **Docker Agent Configuration**: Configure Docker agents (build slaves) that Jenkins can use for running jobs inside Docker containers.
+
+### **2. Using Docker in Jenkins Pipelines**
+
+**Jenkins Pipelines** (using **Declarative** or **Scripted Pipeline**) enable you to define your CI/CD workflow. Docker can be used within Jenkins Pipelines in several ways:
+
+#### **a. Docker as a Build Environment**
+
+You can use Docker to create isolated build environments. Here’s an example of how to use Docker in a Jenkins Pipeline:
+
+```groovy
+pipeline {
+    agent {
+        docker { image 'maven:3.6.3-jdk-11' }
+    }
+    stages {
+        stage('Build') {
+            steps {
+                sh 'mvn clean install'
+            }
+        }
+        stage('Test') {
+            steps {
+                sh 'mvn test'
+            }
+        }
+    }
+}
+```
+
+In this example, Jenkins uses the `maven:3.6.3-jdk-11` Docker image to execute the build and test stages, ensuring that the build environment is consistent.
+
+#### **b. Docker Containers as Build Agents**
+
+You can use Docker containers as Jenkins agents for running jobs. This involves setting up Jenkins to use Docker containers dynamically as build agents.
+
+- **Install the **Docker Swarm Plugin** or **Kubernetes Plugin** if you're using Docker Swarm or Kubernetes.
+- **Configure** Docker or Kubernetes cloud settings in Jenkins to use Docker containers as build agents.
+
+**Example** (Declarative Pipeline):
+
+```groovy
+pipeline {
+    agent {
+        docker {
+            image 'node:14'
+            args '-v /tmp:/tmp'
+        }
+    }
+    stages {
+        stage('Build') {
+            steps {
+                sh 'npm install'
+            }
+        }
+    }
+}
+```
+
+This pipeline uses a `node:14` Docker image to run the build stage.
+
+#### **c. Building Docker Images**
+
+You can use Jenkins to build Docker images and push them to a Docker registry.
+
+**Example** (Declarative Pipeline):
+
+```groovy
+pipeline {
+    agent any
+    stages {
+        stage('Build Docker Image') {
+            steps {
+                script {
+                    docker.build('my-app:latest')
+                }
+            }
+        }
+        stage('Push Docker Image') {
+            steps {
+                script {
+                    docker.withRegistry('https://index.docker.io/v1/', 'dockerhub-credentials') {
+                        docker.image('my-app:latest').push('latest')
+                    }
+                }
+            }
+        }
+    }
+}
+```
+
+In this example:
+- `docker.build('my-app:latest')` builds the Docker image.
+- `docker.withRegistry` authenticates with Docker Hub and pushes the image.
+
+### **3. Docker in Jenkins Agent Setup**
+
+You can configure Jenkins to run on Docker containers, allowing Jenkins itself to be containerized.
+
+- **Docker for Jenkins**:
+  - Create a Docker container running Jenkins, using an official Jenkins Docker image.
+  - Example Docker run command: `docker run -d -p 8080:8080 -p 50000:50000 --name jenkins jenkins/jenkins:lts`
+
+### **4. Docker Compose**
+
+**Docker Compose** can be used to define and manage multi-container applications. You can use it to set up Jenkins with Docker Compose to define your Jenkins environment, including plugins, and build tools.
+
+**Example** `docker-compose.yml` for Jenkins:
+
+```yaml
+version: '3'
+services:
+  jenkins:
+    image: jenkins/jenkins:lts
+    ports:
+      - "8080:8080"
+      - "50000:50000"
+    volumes:
+      - jenkins_home:/var/jenkins_home
+  docker:
+    image: docker:latest
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+volumes:
+  jenkins_home:
+```
+
+### **5. Docker Registry Integration**
+
+Integrate Jenkins with Docker registries (Docker Hub, Amazon ECR, Google Container Registry) to pull and push Docker images.
+
+- **Push Images**: Use Jenkins Pipelines to push built images to Docker registries.
+- **Pull Images**: Configure Jenkins to pull images from Docker registries for builds or deployments.
+
+### **6. Security Considerations**
+
+- **Secure Docker Daemon**: Ensure that the Docker daemon is properly secured, especially when running Jenkins in Docker containers.
+- **Use Docker Secrets**: For storing sensitive information (e.g., credentials), use Docker secrets or environment variables securely.
+
+### **Summary**
+
+- **Jenkins Docker Plugin**: Provides integration for using Docker as build agents and environments.
+- **Pipelines**: Docker can be used within Jenkins Pipelines for consistent build environments and containerized builds.
+- **Docker Agents**: Configure Jenkins to use Docker containers as build agents for isolated build environments.
+- **Image Building and Pushing**: Jenkins can build Docker images and push them to registries.
+- **Docker Compose**: Manage Jenkins and its environment with Docker Compose.
+- **Security**: Ensure secure handling of Docker and Jenkins configurations.
+
+By integrating Docker with Jenkins, you can automate and streamline your CI/CD processes, achieve consistent build environments, and enhance the deployment and scaling of applications.
+
+## 7. How docker is integrated in jenkins?
+
+- **Answer:**
+
+Certainly! To create a basic AWS infrastructure with **1 VPC**, **2 subnets**, and **1 EC2 instance in each subnet** using Terraform, you need to follow industry best practices for organizing and structuring your Terraform code. This includes:
+
+- **Modularity**: Using modules to separate and organize your resources.
+- **Variables**: Defining configurable parameters to make the code reusable.
+- **Outputs**: Exposing useful information like instance IP addresses.
+
+Here's an example Terraform configuration to achieve this setup:
+
+### **1. Directory Structure**
+
+Organize your Terraform files into a directory structure. For this example, use the following structure:
+
+```
+terraform/
+├── main.tf
+├── variables.tf
+├── outputs.tf
+└── providers.tf
+```
+
+### **2. `providers.tf`**
+
+Specify the provider and its version. This file includes the AWS provider configuration:
+
+```hcl
+provider "aws" {
+  region = "us-east-1" # Change to your desired region
+}
+```
+
+### **3. `variables.tf`**
+
+Define variables for your VPC, subnet, and EC2 instance configuration:
+
+```hcl
+variable "vpc_cidr" {
+  description = "CIDR block for the VPC"
+  type        = string
+  default     = "10.0.0.0/16"
+}
+
+variable "subnet_cidr_1" {
+  description = "CIDR block for the first subnet"
+  type        = string
+  default     = "10.0.1.0/24"
+}
+
+variable "subnet_cidr_2" {
+  description = "CIDR block for the second subnet"
+  type        = string
+  default     = "10.0.2.0/24"
+}
+
+variable "instance_type" {
+  description = "EC2 instance type"
+  type        = string
+  default     = "t2.micro"
+}
+
+variable "ami_id" {
+  description = "AMI ID for the EC2 instance"
+  type        = string
+  default     = "ami-0c55b159cbfafe1f0" # Replace with a valid AMI ID for your region
+}
+```
+
+### **4. `main.tf`**
+
+Define your VPC, subnets, and EC2 instances. This file contains the core resources:
+
+```hcl
+# Create a VPC
+resource "aws_vpc" "my_vpc" {
+  cidr_block = var.vpc_cidr
+  enable_dns_support = true
+  enable_dns_hostnames = true
+  tags = {
+    Name = "my-vpc"
+  }
+}
+
+# Create the first subnet
+resource "aws_subnet" "subnet_1" {
+  vpc_id                  = aws_vpc.my_vpc.id
+  cidr_block              = var.subnet_cidr_1
+  availability_zone       = "us-east-1a" # Change to an appropriate AZ
+  map_public_ip_on_launch = true
+  tags = {
+    Name = "subnet-1"
+  }
+}
+
+# Create the second subnet
+resource "aws_subnet" "subnet_2" {
+  vpc_id                  = aws_vpc.my_vpc.id
+  cidr_block              = var.subnet_cidr_2
+  availability_zone       = "us-east-1b" # Change to an appropriate AZ
+  map_public_ip_on_launch = true
+  tags = {
+    Name = "subnet-2"
+  }
+}
+
+# Create a security group
+resource "aws_security_group" "sg" {
+  vpc_id = aws_vpc.my_vpc.id
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+  ingress {
+    from_port   = 22
+    to_port     = 22
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+  tags = {
+    Name = "my-sg"
+  }
+}
+
+# Create the first EC2 instance
+resource "aws_instance" "instance_1" {
+  ami           = var.ami_id
+  instance_type = var.instance_type
+  subnet_id     = aws_subnet.subnet_1.id
+  security_groups = [aws_security_group.sg.name]
+  tags = {
+    Name = "instance-1"
+  }
+}
+
+# Create the second EC2 instance
+resource "aws_instance" "instance_2" {
+  ami           = var.ami_id
+  instance_type = var.instance_type
+  subnet_id     = aws_subnet.subnet_2.id
+  security_groups = [aws_security_group.sg.name]
+  tags = {
+    Name = "instance-2"
+  }
+}
+```
+
+### **5. `outputs.tf`**
+
+Expose useful information such as public IPs of the EC2 instances:
+
+```hcl
+output "instance_1_public_ip" {
+  value = aws_instance.instance_1.public_ip
+}
+
+output "instance_2_public_ip" {
+  value = aws_instance.instance_2.public_ip
+}
+```
+
+### **Deploying the Terraform Configuration**
+
+1. **Initialize** your Terraform workspace:
+   ```sh
+   terraform init
+   ```
+
+2. **Validate** your configuration:
+   ```sh
+   terraform validate
+   ```
+
+3. **Plan** your deployment to see what will be created:
+   ```sh
+   terraform plan
+   ```
+
+4. **Apply** the configuration to create the resources:
+   ```sh
+   terraform apply
+   ```
+
+   Review the plan and confirm the changes.
+
+### **Summary**
+
+This Terraform configuration sets up:
+- A **VPC** with a CIDR block.
+- **Two subnets** in different Availability Zones.
+- **Two EC2 instances**, one in each subnet.
+- A **security group** to allow SSH access.
+
+Adjust the AMI ID and availability zones as per your requirements and region. This setup provides a basic structure, which can be expanded with additional resources and configurations as needed.
+
+
