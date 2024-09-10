@@ -1,6 +1,6 @@
 Notes - 
 
-->To automate the transition of S3 objects between their different tiers we can use 'S3 Lifecycle Rules'.
+->To automate the transition of S3 objects between their different tiers we can use 'S3 Lifecycle Rules'. 
 
 ->To get recommendations for S3 Lifecycle rules on the optimal number of days to move objects between different storage tiers we can use 'S3 Analytics'.
 
