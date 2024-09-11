@@ -78,8 +78,11 @@ The standard module structure is a file and directory layout HashiCorp recommend
 A minimal recommended module following the standard structure is shown below -
 
 |- README.md
+
 |- main.tf
+
 |- variable.tf
+
 |- output.tf
 
 
