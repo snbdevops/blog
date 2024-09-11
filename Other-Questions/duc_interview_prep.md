@@ -1,6 +1,6 @@
 ### Q1. Know in and out of these files - 
 1. JenkinsFile
-Link for Sample file - ``` https://github.com/snbdevops/blog/blob/main/Other-Questions/sample-JenkinsFile.md```
+Link for Sample file - ``` https://github.com/snbdevops/blog/blob/main/Other-Questions/sample-JenkinsFile.md ```
 
 3. DockerFile
 
