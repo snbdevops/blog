@@ -1,9 +1,9 @@
 ### Q1. Know in and out of these files - 
-1. JenkinsFile - ``` https://github.com/snbdevops/blog/blob/main/Other-Questions/sample-JenkinsFile.md ```
+1. JenkinsFile - https://github.com/snbdevops/blog/blob/main/Other-Questions/sample-JenkinsFile.md 
 
-3. DockerFile - ```https://github.com/snbdevops/blog/blob/main/Other-Questions/sample-DockerFile.md```
+3. DockerFile - https://github.com/snbdevops/blog/blob/main/Other-Questions/sample-DockerFile.md
 
-4. Kubernetes manifest file - ```https://github.com/snbdevops/blog/blob/main/Other-Questions/sample-kubernetes-manifest-file.md```
+4. Kubernetes manifest file - https://github.com/snbdevops/blog/blob/main/Other-Questions/sample-kubernetes-manifest-file.md
 
 5. ansible-playbooks - https://github.com/snbdevops/blog/blob/main/Other-Questions/sample-ansible-playbook.md
 
