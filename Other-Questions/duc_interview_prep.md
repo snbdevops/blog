@@ -181,9 +181,8 @@ If you have more hosts than the fork limit, Ansible will process them in batches
 - Can be set in the **`ansible.cfg`** file or via the `-f` flag on the command line.
 - Increasing forks can improve performance, but too many forks may overload your system.
 
- 
 # Q6. If you want to deploy any Application in AWS, so what all services you Will select or use for that Application 
- 
+ I would go with a 3-tier architecture approach
 # Q7. Difference between ALB and NLB? Both ELB's work on which OSI layer?
  
 # Q8. If Netflix type of application is there then which of Elb we need to use for the same?
