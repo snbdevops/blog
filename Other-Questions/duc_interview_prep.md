@@ -1,5 +1,5 @@
-### Q1. Know in and out of these files - 
-### Answer -
+# Q1. Know in and out of these files - 
+
 1. JenkinsFile - https://github.com/snbdevops/blog/blob/main/Other-Questions/sample-JenkinsFile.md 
 
 2. DockerFile - https://github.com/snbdevops/blog/blob/main/Other-Questions/sample-DockerFile.md
@@ -8,12 +8,12 @@
 
 4. ansible-playbooks - https://github.com/snbdevops/blog/blob/main/Other-Questions/sample-ansible-playbook.md
 
-### Q2. Explain Docker file instructions
+# Q2. Explain Docker file instructions
 
 Refer Q1.2
 
-### Q3. Which files or .yaml files are mandatory in Ansible roles?
-### Answer -
+# Q3. Which files or .yaml files are mandatory in Ansible roles?
+
 In Ansible, roles are a way to organize playbooks and other files in a standardized format. When creating an Ansible role, there are several directories and files that are part of the standard structure. However, not all of them are mandatory. Below are the **mandatory** files and directories that must be present for an Ansible role to function properly:
 
 ### Mandatory Files in Ansible Roles
@@ -119,35 +119,36 @@ myrole/
 
 These two files are the bare minimum for a role to work in Ansible.
 
+# Q4. Explain the ansible playbook you have written and write the same now
 
-### Q4. Explain the ansible playbook you have written and write the same now
+Refer Q1.4
  
-### Q5. What is Fork in Ansible
+# Q5. What is Fork in Ansible
  
-### Q6. If you want to deploy any Application in AWS, so what all services you Will select or use for that Application 
+# Q6. If you want to deploy any Application in AWS, so what all services you Will select or use for that Application 
  
-### Q7. Difference between ALB and NLB? Both ELB's work on which OSI layer?
+# Q7. Difference between ALB and NLB? Both ELB's work on which OSI layer?
  
-### Q8. If Netflix type of application is there then which of Elb we need to use for the same?
+# Q8. If Netflix type of application is there then which of Elb we need to use for the same?
  
-### Q9. What is Terraform core?
+# Q9. What is Terraform core?
  
-### Q10. Have you write custom Modules in Terraform?
+# Q10. Have you write custom Modules in Terraform?
 
-### Q11. What is State file locking in Terraform?
+# Q11. What is State file locking in Terraform?
  
-### Q12. What is Canary and Blue Green deployment in Kubernetes?
+# Q12. What is Canary and Blue Green deployment in Kubernetes?
  
-### Q13. If you want to deploy Blue green deployment, so in .Yaml file where you need to specify or mention Blue green deployment?
+# Q13. If you want to deploy Blue green deployment, so in .Yaml file where you need to specify or mention Blue green deployment?
 
-### Q14. How you upgrade in EKS, please explain the steps
+# Q14. How you upgrade in EKS, please explain the steps
 
-### Q15. Difference between stateful set and deployment in kubernetes?
+# Q15. Difference between stateful set and deployment in kubernetes?
 
-### Q15. Steps involved in creating an EC2 instance.
+# Q15. Steps involved in creating an EC2 instance.
  
-### Q16. What is Terraform refresh?
+# Q16. What is Terraform refresh?
 
-### Q17. How to get IP Address of the running pod?
+# Q17. How to get IP Address of the running pod?
 
 
