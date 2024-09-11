@@ -1,12 +1,11 @@
 ### Q1. Know in and out of these files - 
-1. JenkinsFile
-Link for Sample file - ``` https://github.com/snbdevops/blog/blob/main/Other-Questions/sample-JenkinsFile.md ```
+1. JenkinsFile - ``` https://github.com/snbdevops/blog/blob/main/Other-Questions/sample-JenkinsFile.md ```
 
-3. DockerFile
+3. DockerFile - ```https://github.com/snbdevops/blog/blob/main/Other-Questions/sample-DockerFile.md```
 
-4. Kubernetes manifest files
+4. Kubernetes manifest file - ```https://github.com/snbdevops/blog/blob/main/Other-Questions/sample-kubernetes-manifest-file.md```
 
-5. ansible-playbooks
+5. ansible-playbooks - https://github.com/snbdevops/blog/blob/main/Other-Questions/sample-ansible-playbook.md
 
 ### Q2. Explain Docker file instructions
 
@@ -39,3 +38,7 @@ Link for Sample file - ``` https://github.com/snbdevops/blog/blob/main/Other-Que
 ### Q15. Steps involved in creating an EC2 instance.
  
 ### Q16. What is Terraform refresh?
+
+### Q17. How to get IP Address of the running pod?
+
+
