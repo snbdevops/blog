@@ -1,8 +1,12 @@
 ### Q1. Know in and out of these files - 
-JenkinsFile
-DockerFile
-Kubernetes manifest files
-ansible-playbooks
+1. JenkinsFile
+
+
+2. DockerFile
+
+3. Kubernetes manifest files
+
+4. ansible-playbooks
 
 ### Q2. Explain Docker file instructions
 
