@@ -39,12 +39,6 @@ Then, in the resource, we can refer the local as
 local.instance_types[terraform.workspace]
 
 ```
-
 Hashicorp link for this - https://developer.hashicorp.com/terraform/language/expressions/types
 
-
-local.instance_types[terraform.workspace]
-
-
-
-*****can we create terraform workspace to create resources in different aws account?
+*****how can we create terraform workspace to create resources in different aws account?
