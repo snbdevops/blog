@@ -1,15 +1,124 @@
 ### Q1. Know in and out of these files - 
+### Answer -
 1. JenkinsFile - https://github.com/snbdevops/blog/blob/main/Other-Questions/sample-JenkinsFile.md 
 
-3. DockerFile - https://github.com/snbdevops/blog/blob/main/Other-Questions/sample-DockerFile.md
+2. DockerFile - https://github.com/snbdevops/blog/blob/main/Other-Questions/sample-DockerFile.md
 
-4. Kubernetes manifest file - https://github.com/snbdevops/blog/blob/main/Other-Questions/sample-kubernetes-manifest-file.md
+3. Kubernetes manifest file - https://github.com/snbdevops/blog/blob/main/Other-Questions/sample-kubernetes-manifest-file.md
 
-5. ansible-playbooks - https://github.com/snbdevops/blog/blob/main/Other-Questions/sample-ansible-playbook.md
+4. ansible-playbooks - https://github.com/snbdevops/blog/blob/main/Other-Questions/sample-ansible-playbook.md
 
 ### Q2. Explain Docker file instructions
 
-### Q3. Which files or .yaml files are mandetory in Ansible roles?
+Refer Q1.2
+
+### Q3. Which files or .yaml files are mandatory in Ansible roles?
+### Answer -
+In Ansible, roles are a way to organize playbooks and other files in a standardized format. When creating an Ansible role, there are several directories and files that are part of the standard structure. However, not all of them are mandatory. Below are the **mandatory** files and directories that must be present for an Ansible role to function properly:
+
+### Mandatory Files in Ansible Roles
+
+1. **`tasks/main.yml`**
+   - **Purpose**: This file contains the main tasks that the role will execute. The tasks defined here are the core of the role and describe what actions should be performed.
+   - **Example**:
+     ```yaml
+     ---
+     - name: Install Nginx
+       apt:
+         name: nginx
+         state: present
+     ```
+
+2. **`meta/main.yml`**
+   - **Purpose**: This file contains metadata about the role, including dependencies (if any). It's also where you define the minimum Ansible version or galaxy dependencies if required.
+   - **Example**:
+     ```yaml
+     ---
+     dependencies:
+       - { role: common, tags: ['common'] }
+     ```
+
+### Optional but Commonly Used Files and Directories
+
+While the following files are not strictly mandatory, they are commonly used and part of the best practices for organizing roles:
+
+1. **`handlers/main.yml`**
+   - **Purpose**: This file defines handlers, which are tasks triggered by `notify` directives from tasks in the `tasks/main.yml`.
+   - **Example**:
+     ```yaml
+     ---
+     - name: Restart Nginx
+       service:
+         name: nginx
+         state: restarted
+     ```
+
+2. **`vars/main.yml`**
+   - **Purpose**: This file contains variables that are used within the role. These variables are static and cannot be overridden during runtime.
+   - **Example**:
+     ```yaml
+     ---
+     nginx_package: nginx
+     ```
+
+3. **`defaults/main.yml`**
+   - **Purpose**: Contains default variables that can be overridden by playbook-level variables or other higher-priority variable sources.
+   - **Example**:
+     ```yaml
+     ---
+     nginx_port: 80
+     ```
+
+4. **`files/`**
+   - **Purpose**: This directory is used to store files that can be copied to the target machine via the `copy` or `template` module.
+   - **Example**: You might place a custom `nginx.conf` file here.
+
+5. **`templates/`**
+   - **Purpose**: Stores Jinja2 templates that can be used with the `template` module to dynamically generate configuration files.
+   - **Example**: `nginx.conf.j2` template.
+
+6. **`roles/`**
+   - **Purpose**: This directory stores other roles if the role depends on multiple sub-roles or additional functionality.
+
+### Minimal Role Structure
+
+Here’s a minimal role structure with only the mandatory files:
+
+```
+myrole/
+├── tasks/
+│   └── main.yml      # Mandatory file
+├── meta/
+│   └── main.yml      # Mandatory file
+```
+
+#### Complete Role Structure Example (Including Optional Files)
+
+```shell
+myrole/
+├── tasks/
+│   └── main.yml      # Mandatory
+├── handlers/
+│   └── main.yml      # Optional but common
+├── templates/
+│   └── nginx.conf.j2 # Optional
+├── files/
+│   └── myapp.conf    # Optional
+├── vars/
+│   └── main.yml      # Optional but common
+├── defaults/
+│   └── main.yml      # Optional but common
+├── meta/
+│   └── main.yml      # Mandatory
+└── README.md         # Optional documentation
+```
+
+### Summary of Mandatory Files:
+- **`tasks/main.yml`**: Contains the primary tasks for the role.
+- **`meta/main.yml`**: Contains metadata for the role, including dependencies. 
+
+These two files are the bare minimum for a role to work in Ansible.
+
 
 ### Q4. Explain the ansible playbook you have written and write the same now
  
