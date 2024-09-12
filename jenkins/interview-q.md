@@ -1,5 +1,4 @@
-Here is a list of 10 scenario-based Jenkins interview questions and their detailed answers to get you started. I will create more questions and answers in the same format to reach 100 if you like these:
-
+#Jenkins Interview Questions
 ---
 
 ### 1. **Scenario: You need to set up a Jenkins pipeline for a Java-based application. How would you ensure that the application is compiled, tested, and deployed to a staging environment?**
