@@ -530,14 +530,3 @@ Here are 10 more scenario-based Jenkins interview questions with detailed answer
       ```
 
 ---
-
-### 31. **Scenario: You want to monitor and visualize Jenkins performance metrics. How would you achieve this?**
-
-   **Answer**:
-   1. **Monitoring Plugins**: Install plugins like `Monitoring` or `Metrics Plugin` to track Jenkins' CPU, memory, and other resource usage.
-   2. **Prometheus Integration**: Install the `Prometheus Metrics Plugin` to expose Jenkins metrics to Prometheus.
-   3. **Visualization**: Use tools like Grafana to visualize the Jenkins metrics for monitoring and alerting on performance issues.
-
----
-
-These questions and answers further explore common Jenkins scenarios related to security, automation, and integrations. Let me know if you'd like more examples!
