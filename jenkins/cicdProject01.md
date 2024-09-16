@@ -263,7 +263,7 @@ Setup Kubernetes cluster using terraform
    ```
  by this time we are ready with our terraform modules to create a cluster
 
-**Step 14**. 
+**Step 14** -
 Integrate build server with Kubernetes cluster 
 
 1. Setup kubectl   
@@ -294,7 +294,7 @@ Integrate build server with Kubernetes cluster
     aws eks update-kubeconfig --region us-east-1 --name my-eks-01
    ```
 
-**Step 15**. 
+**Step 15** - 
 Integrate Jfrog with Kubernetes cluster
   
 1. Create a dedicated user to use for a docker login   
@@ -318,7 +318,9 @@ Make sure secret value name `regcred` is updated in the deployment file.
 
   `copy auth value to encode` cat ~/.docker/config.json | base64 -w0 `use above command output in the secret`
 ```
-**Step 16** - 
+
+**Step 16** -
+
 Helm setup 
 
 1. Install helm
@@ -437,7 +439,7 @@ Other useful commands
    kubectl config set-context --current --namespace=valaxy
    ```
 
-**Step 18**. 
+**Step 18** - 
 Prometheus & grafana setup
 
 **pre-requisites**
