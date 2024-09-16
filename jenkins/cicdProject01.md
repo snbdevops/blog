@@ -92,7 +92,7 @@ Payload URl: <jenkins_IP>:8080/multibranch-webhook-trigger/invoke?token=<token_n
 Content type: application/json
 Which event would you like to trigger this webhook: just the push event
 
-**Step 9 - **
+**Step 9** -
 Setting up SonarQube for code scan and quality check. Steps as below
 
 i) Create Sonar cloud account on https://sonarcloud.io
