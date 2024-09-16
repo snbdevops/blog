@@ -32,16 +32,6 @@
 
 ---
 
-### 2. **Scenario: Jenkins is failing during the execution of a long-running job. What steps would you take to troubleshoot and resolve this issue?**
-
-   **Answer**:
-   1. **Check Jenkins Logs**: Investigate `/var/log/jenkins/jenkins.log` or view logs via the Jenkins UI (`Manage Jenkins` -> `System Log`).
-   2. **Memory/Resource Limits**: Check for memory issues by reviewing the system's resource usage. Increase the JVM memory if needed by adjusting Jenkins' `JAVA_OPTS`.
-   3. **Job Timeout**: Ensure the job timeout setting is sufficient for long-running jobs (this can be managed via the Pipeline syntax or the `Build Timeout` plugin).
-   4. **Parallelize the Job**: If the job runs for too long, split it into smaller parallel stages or jobs.
-
----
-
 ### 3. **Scenario: You have multiple jobs dependent on each other. How would you ensure that if one job fails, the others do not run?**
 
    **Answer**:
@@ -65,15 +55,6 @@
      }
      ```
    - Alternatively, use the **"Build other projects"** post-build action in freestyle jobs to trigger subsequent jobs conditionally.
-
----
-
-### 4. **Scenario: Jenkins builds are failing due to a dependency issue in the code. How would you identify and resolve this issue?**
-
-   **Answer**:
-   1. **Check Build Logs**: Look for specific error messages related to dependencies in the Jenkins console output.
-   2. **Dependency Management**: Ensure proper dependency management via tools like Maven or Gradle. Check `pom.xml` (for Maven) or `build.gradle` for conflicting or missing dependencies.
-   3. **Cache Issues**: Clear local caches (Maven or Gradle) if a corrupt dependency is cached. In Jenkins, you can clean the workspace and force Maven/Gradle to re-download dependencies.
 
 ---
 
@@ -171,9 +152,6 @@
 
 ---
 
-Here are 10 more scenario-based Jenkins interview questions with detailed answers:
-
----
 
 ### 11. **Scenario: Your Jenkins build is taking too long to complete due to the large number of unit tests. How would you optimize this?**
 
@@ -322,24 +300,6 @@ Here are 10 more scenario-based Jenkins interview questions with detailed answer
    4. **Firewall/Network Issues**: Check for any network issues or firewalls blocking the connection.
 
 ---
-
-### 20. **Scenario: Jenkins is using too much disk space, and the server is running out of capacity. How would you handle this?**
-
-   **Answer**:
-   1. **Workspace Cleanup**: Configure Jenkins to clean up workspaces after builds, especially for jobs that don’t need to retain old data.
-   2. **Artifact Retention**: Use the **"Discard old builds"** option to limit the number of builds retained:
-      ```groovy
-      options {
-          buildDiscarder(logRotator(numToKeepStr: '10', artifactNumToKeepStr: '5'))
-      }
-      ```
-   3. **Slave Cleanup**: Periodically clean up the Jenkins agents to remove old, unused files.
-
----
-Here are 10 more scenario-based Jenkins interview questions with detailed answers:
-
----
-
 ### 21. **Scenario: You need to trigger a Jenkins build when a specific tag is pushed to the Git repository. How would you configure Jenkins for this?**
 
    **Answer**:
