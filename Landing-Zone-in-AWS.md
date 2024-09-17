@@ -147,9 +147,7 @@ If you are using AWS Control Tower to manage your landing zone, follow the steps
 
    - **AWS Config**: Continuously enforce compliance and governance by creating AWS Config rules that monitor resource changes.
    - **Patch Automation**: Use AWS Systems Manager Patch Manager to automate patching for EC2 instances and other resources.
-   - **Cost Optimization Reviews**: Continuously monitor usage, perform rights
-
-izing, and adjust Reserved Instances or Savings Plans.
+   - **Cost Optimization Reviews**: Continuously monitor usage, perform rightsizing, and adjust Reserved Instances or Savings Plans.
 
 ---
 
