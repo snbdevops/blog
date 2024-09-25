@@ -87,14 +87,17 @@ As shown below, 'Manage Jenkins' contains 5 sub catagories -
 
 5. Tools and Actions -
 
-      a) 
+      a) Reload Configuration from Disk - Discard all the loaded data in memory and reload everything from file system. Useful when you modified config files directly on disk.
 
-      b) 
+      b) Jenkins CLI - You can access various features in Jenkins through a command-line tool. Refer: https://www.jenkins.io/doc/book/managing/cli/
 
-      c) 
+      c) Script Console - Executes arbitary scripts for admin/troubleshooting/diagnostics purpose. Type in an arbitrary (in Groovy script) and execute it on the server. Use the ‘println’ command to see the output (if you use System.out, it will go to the server’s stdout, which is harder to see).
 
-      d) 
+   Example: println(Jenkins.instance.pluginManager.plugins)
 
-### V. Adding Credentials of systems/resources.
+      d) Prepare for Shutdown - To shutdown Jenkins.
+
+<img width="692" alt="image" src="https://github.com/user-attachments/assets/fb1e39f6-352f-4641-a3dc-eb2b8a91df56">
+
 
 
