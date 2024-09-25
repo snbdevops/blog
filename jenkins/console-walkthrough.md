@@ -57,13 +57,15 @@ As shown below, 'Manage Jenkins' contains 5 sub catagories -
 
 2. Security -
 
-      a)
+      a) Security - It secures Jenkins; defines who is allowed to access what.
+ 
+      b) Credentials - All Jenkins logs are recorded here.    
 
-      b)
+      c) Credentials Providers - Configures the credential provider and type.
 
-      c)
+      d) Users - Used to create, Delete and Manage users.
 
-      d)
+   <img width="698" alt="image" src="https://github.com/user-attachments/assets/2200deb4-f9d1-4a25-b836-ce50a979b92e">
 
 4. Status Information -
 
