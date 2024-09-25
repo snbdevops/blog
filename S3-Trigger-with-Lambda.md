@@ -42,7 +42,9 @@ Whenever a file is uploaded to an S3 bucket, the Lambda function will be trigger
 2. **Deploy the Code**:
    - Click **Deploy** to save and deploy the updated function.
 
-#### **Step 3: Upload a File to the S3 Bucket**
+#### **Step 3: Creating SNS email notification as destination**
+
+#### **Step 4: Upload a File to the S3 Bucket**
 
 1. **Upload a Test File**:
    - Go to your S3 bucket and upload any file (e.g., `testfile.txt`).
