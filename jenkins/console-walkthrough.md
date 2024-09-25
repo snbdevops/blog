@@ -59,7 +59,7 @@ As shown below, 'Manage Jenkins' contains 5 sub catagories -
 
       a) Security - It secures Jenkins; defines who is allowed to access what.
  
-      b) Credentials - All Jenkins logs are recorded here.    
+      b) Credentials - In this section, we configure credentials of all the resources which we need to integrate with Jenkins.    
 
       c) Credentials Providers - Configures the credential provider and type.
 
@@ -67,15 +67,33 @@ As shown below, 'Manage Jenkins' contains 5 sub catagories -
 
    <img width="698" alt="image" src="https://github.com/user-attachments/assets/2200deb4-f9d1-4a25-b836-ce50a979b92e">
 
-4. Status Information -
+3. Status Information -
 
+      a) System Information - 
 
+      b) System Logs - All Jenkins logs are recorded here.
 
-5. Troubleshooting -
+      c) Load Statistics - It shows us the stats of how resources are utilized. 4 Parameters measured resources are - i) Number of online executors, ii) Number of busy executors, iii) Number of available executors, iv) Queue length.
 
+      d) About Jenkins -
 
+   <img width="688" alt="image" src="https://github.com/user-attachments/assets/27261f7d-8840-4651-ac57-263ef06b259f">
 
-6. Tools and Actions - 
+4. Troubleshooting - 
+
+      a) Manage Old Data
+
+   <img width="355" alt="image" src="https://github.com/user-attachments/assets/0bd8d582-6c11-4356-a2a0-44c8cfd21cc6">
+
+5. Tools and Actions -
+
+      a) 
+
+      b) 
+
+      c) 
+
+      d) 
 
 ### V. Adding Credentials of systems/resources.
 
