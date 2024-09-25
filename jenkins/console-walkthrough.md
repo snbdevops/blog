@@ -39,24 +39,41 @@ If the node is available it should NOT have cross(X) in the 1st column of the No
 
 As shown below, 'Manage Jenkins' contains 5 sub catagories - 
 
-1. System Configuration -
+1. System Configuration - As the name suggests all the system related configurations are done from this section.
+
    a) Systems - Here we can do all the global settings for our builds related to the Jenkins Node.
+   
    b) Tools - Here we can do the configuration regarding installed utilities and plugins.
+
    c) Plugins - We can download the required plugins from this section.
+
    d) Nodes - We can add nodes as we seen in section-II.
+
    e) Cloud - We congiure cloud instances to provision agents on-demand. 
+
    f) Appearance - We can change the colour of the Jenkins console.
 
    <img width="692" alt="image" src="https://github.com/user-attachments/assets/7162ea23-c26f-45ee-902d-822ea12c498c">
 
-   
 2. Security -
 
-3. Status Information -
+      a)
 
-4. Troubleshooting -
+      b)
 
-5. Tools and Actions - 
+      c)
+
+      d)
+
+4. Status Information -
+
+
+
+5. Troubleshooting -
+
+
+
+6. Tools and Actions - 
 
 ### V. Adding Credentials of systems/resources.
 
