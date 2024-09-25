@@ -28,13 +28,36 @@ When we login we are redirected to the dashboard of the Jenkins. Here we see bel
 3. Finally we will be redirected to a form where we need to fill few details and some of the important details are 'Number of executors', 'Remote root directory', 'Labels', 'Usage', 'Launch method', 'Availability', etc. Fill them and click on SAVE.
 <img width="1500" alt="image" src="https://github.com/user-attachments/assets/1f3ee0e4-c200-4594-b730-d2c94f24b1c2">
 
-Note: In the Launch Method, if we use Launch via SSH, we need to give the node host and add the credentials and refer here. To add credentials, watch section IV.
+Note: In the Launch Method, if we use Launch via SSH, we need to give the node host and add the credentials and refer here. To add credentials, watch section V.
 
 4. Check if the added node is visible and live or not.
 If the node is available it should NOT have cross(X) in the 1st column of the Nodes.
 
 <img width="955" alt="image" src="https://github.com/user-attachments/assets/dfb221ad-7e16-4f32-872f-cf853d8d65e4">
 
+### IV. Navigating 'Manage Jenkins'
 
+As shown below, 'Manage Jenkins' contains 5 sub catagories - 
+
+1. System Configuration -
+   a) Systems - Here we can do all the global settings for our builds related to the Jenkins Node.
+   b) Tools - Here we can do the configuration regarding installed utilities and plugins.
+   c) Plugins - We can download the required plugins from this section.
+   d) Nodes - We can add nodes as we seen in section-II.
+   e) Cloud - We congiure cloud instances to provision agents on-demand. 
+   f) Appearance - We can change the colour of the Jenkins console.
+
+   <img width="692" alt="image" src="https://github.com/user-attachments/assets/7162ea23-c26f-45ee-902d-822ea12c498c">
+
+   
+2. Security -
+
+3. Status Information -
+
+4. Troubleshooting -
+
+5. Tools and Actions - 
+
+### V. Adding Credentials of systems/resources.
 
 
