@@ -5,6 +5,9 @@ Now, let's create a more advanced example where Lambda is triggered by an event 
 #### **Scenario**:
 Whenever a file is uploaded to an S3 bucket, the Lambda function will be triggered to process the file.
 
+#### **Design**:
+![image](https://github.com/user-attachments/assets/927079fe-2fd0-4e78-9be0-3ace9bb1d1aa)
+
 #### **Step 1: Create an S3 Bucket**
 1. **Go to S3 Console**:
    - Open the AWS S3 console and create a new bucket (e.g., `my-lambda-trigger-bucket`).
