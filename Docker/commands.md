@@ -57,9 +57,13 @@ docker build -t <<your-docker-hub-id>>/<image_name>:v1   <--- build a dockerfile
 #Sample docker file. Dockerfile
 
 FROM openjdk:8-jdk-alpine
+
 VOLUME /tmp
+
 EXPOSE 8080
+
 ADD target/*.jar app.jar
+
 ENTRYPOINT [ "sh", "-c", "java -jar /app.jar" ]
 
 ---
