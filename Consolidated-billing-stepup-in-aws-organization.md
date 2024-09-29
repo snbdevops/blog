@@ -72,8 +72,4 @@ AWS Organizations allows you to set up consolidated billing to manage multiple A
 4. **Account Autonomy**: Member accounts can still operate independently but are billed centrally.
 5. **Simplified Financial Management**: Centralized billing simplifies accounting, tax, and financial reporting processes.
 
-### Diagram Overview:
-- **Management Account (Master Account)**: Handles billing and administration.
-- **Member Accounts**: Contribute to consolidated billing and receive the benefits of shared discounts.
-
 By setting up **AWS Organizations** for consolidated billing, we can streamline cost management, ensure that savings plans and volume discounts are shared, and simplify the financial oversight of multiple AWS accounts.
