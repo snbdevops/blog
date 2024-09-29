@@ -1,4 +1,4 @@
-AWS Organizations allows you to set up consolidated billing to manage multiple AWS accounts under one umbrella, making it easier to track and optimize costs. Here’s a step-by-step guide to set up **consolidated billing** using **AWS Organizations**:
+AWS Organizations allows you to set up consolidated billing to manage multiple AWS accounts under one umbrella, making it easier to track and optimize costs. Below mentioned is a step-by-step guide to set up **consolidated billing** using **AWS Organizations**:
 
 ### Steps to Set Up Consolidated Billing with AWS Organizations
 
