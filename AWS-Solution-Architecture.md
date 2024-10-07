@@ -1650,7 +1650,8 @@ keep rest as per requirement and once filled click on 'create task'.
 AWS Outposts is a fully managed service that offers the same AWS infra, AWS service, APIs and tools to virtually any datacenter, co-location space, or on-premises facility.
 
 ### AWS DataSync
-- AWS Datasync is an online data transfer service that simplifies, automates, and accelerates moving data between storage systems and services.
+
+-AWS Datasync is an online data transfer service that simplifies, automates, and accelerates moving data between storage systems and services.
 
 -Datasync provides end-to-end security, including encryption, integrity validation to help ensure that your data arrives securely, intact and ready to use.
 
