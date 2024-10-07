@@ -1557,13 +1557,16 @@ Note - AWS Mgmt Portal for vCenter allows customer to manage the AWS resources f
 -So as part of demo, we will migrate a employee database from the digital ocean env. to the EC two instance. So let's go ahead and look into the process at a very high level steps overview.
 
 -In DMS console, under Migrate Data > Click on DB migration task> fillup the create db migration task form as below - 
-	Name: migration task.
-	Replication Instance: Choose the created replication instance.[create this first if not created]
-	Source DB Endpoint:[create this first if not created][It is connected to source DB]
-	Target DB Endpoint:[create this first if not created][It is connected to source DB]
+Name: migration task.
+	
+Replication Instance: Choose the created replication instance.[create this first if not created]
 
-        Selection rules:
-	   Source Name: employees
+Source DB Endpoint:[create this first if not created][It is connected to source DB]
+
+Target DB Endpoint:[create this first if not created][It is connected to source DB]
+
+Selection rules:
+   Source Name: employees
 
 keep rest as per requirement and once filled click on 'create task'. 
 
