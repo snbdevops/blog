@@ -1633,7 +1633,7 @@ keep rest as per requirement and once filled click on 'create task'.
 
  -SCT can also run in offline mode.
 
-#### DMS Migration Types
+### DMS Migration Types
 
 -Migrate existing data - perform a one-time migration from source endpt to the tgt endpt.
 
