@@ -1568,7 +1568,7 @@ Target DB Endpoint:[create this first if not created][It is connected to source 
 Selection rules:
    Source Name: employees
 
-keep rest as per requirement and once filled click on 'create task'. 
+keep rest as per requirement and once filled click on '**create task**'. 
 
 -DMS traditionally moves smaller relational workloads(<10 TB).
 
@@ -1611,3 +1611,4 @@ AWS Outposts is a fully managed service that offers the same AWS infra, AWS serv
 -Datasync provides end-to-end security, including encryption, integrity validation to help ensure that your data arrives securely, intact and ready to use.
 
 -Transferring the data between the on premise and a aws, there is a requirement of data sync agent.
+
