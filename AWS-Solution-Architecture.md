@@ -1557,81 +1557,89 @@ The functional responsibilities of an AWS Solutions Architect go beyond the tech
 
 There is a plugin which helps us to achieve this. When we right click on that we see options of 'Migrate to EC2'. Once we click that we are asked few info like OS, Region, Env, Subnet, Instance type, SG, etc. Click on ok after that. It will be migrated to EC2.
 
-	Note - AWS Mgmt Portal for vCenter allows customer to manage the AWS resources from their VMWare vCenter dashboard itself.
+Note - AWS Mgmt Portal for vCenter allows customer to manage the AWS resources from their VMWare vCenter dashboard itself.
 
 ### AWS Server Migration Service(SMS)
-	AWS SMS is an agentless service which makes it easier and faster for you to migrate thousands of on-premises workloads to AWS.
 
-	Supported platforms: vSphere and Hyper-V.
+-AWS SMS is an agentless service which makes it easier and faster for you to migrate thousands of on-premises workloads to AWS.
+
+-Supported platforms: vSphere and Hyper-V.
 
 -Steps involved.
-	1. Scheduled: Schedule migration job
-	2. Uploading:
-		a) Take a snapshot, b) Export VM to OVF template, c) upload VMDK to the S3 bucket, d) Clean the snapshot.
 
-	3. Converting:
-		a)Convert VMDK file to an AWS EBS snapshot, b) Delete the VMDK file in the S3 bucket.
+1. Scheduled: Schedule migration job
 
-	4. Create an AMI
+2. Uploading:
+        a) Take a snapshot, b) Export VM to OVF template, c) upload VMDK to the S3 bucket, d) Clean the snapshot.
+
+4. Converting:
+	a)Convert VMDK file to an AWS EBS snapshot, b) Delete the VMDK file in the S3 bucket.
+
+5. Create an AMI
 
 ### Application Discovery Service
 
 -AWS Application Discovery Service helps enterprise customer plan migration projects by gathering information about their on-prem data centers.
+
 -For enterprises which has 100s to 1000s of servers on-prem, we get to know network dependency(it shows in a diagrammatic representation), right instance types for them can be, etc.
+
 -It supports both agentless discovery and agent-based discovery.
+
 -Agentless service needs installation of the discovery connector in VMware vCenter. 
+
 -Agent-based service requires agent to be installed in OS.[with this we get network and dependencies diagrammatic representation].
 
 ### AWS DMS
-	-AWS DMS is a cloud service that makes it possible to migrate relational db, data warehouses, NoSQL db, and other types of data stores.
 
-	-We can use AWS DMS to migrate our data into the AWS cloud or between combinations of cloud and on-prem. setups.
+-AWS DMS is a cloud service that makes it possible to migrate relational db, data warehouses, NoSQL db, and other types of data stores.
 
-                                  	      AWS DMS
-                                  	          |		       {Replication Instance}	            |
-                                  Source DB --|-> Source Endpoint ---> [Replication task] ---> Tgt Endpt. --|-> Tgt DB
-                                  	          |						            |
+-We can use AWS DMS to migrate our data into the AWS cloud or between combinations of cloud and on-prem. setups.
 
-	-At a basic level, AWS DMS is a server in the AWS Cloud that runs replication software. So we have the DMS server, it takes the data from on premise and it copies it to a specific target. And this is the reason why you create a source and a target connection to tell the DMS where to extract from and load to. So this specific DMS should be able to connect to both the database in the on premise as well as the target database.
+			      AWS DMS
+			      |		             {Replication Instance}	            |
+		  Source DB --|-> Source Endpoint ---> [Replication task] ---> Tgt Endpt. --|-> Tgt DB
+			      |						                    |
 
-	-So as part of demo, we will migrate a employee database from the digital ocean env. to the EC two instance. So let's go ahead and look into the process at a very high level steps overview.
+-At a basic level, AWS DMS is a server in the AWS Cloud that runs replication software. So we have the DMS server, it takes the data from on premise and it copies it to a specific target. And this is the reason why you create a source and a target connection to tell the DMS where to extract from and load to. So this specific DMS should be able to connect to both the database in the on premise as well as the target database.
 
-1. In DMS console, under Migrate Data > Click on DB migration task> fillup the create db migration task form as below - 
+-So as part of demo, we will migrate a employee database from the digital ocean env. to the EC two instance. So let's go ahead and look into the process at a very high level steps overview.
+
+-In DMS console, under Migrate Data > Click on DB migration task> fillup the create db migration task form as below - 
 	Name: migration task.
 	Replication Instance: Choose the created replication instance.[create this first if not created]
 	Source DB Endpoint:[create this first if not created][It is connected to source DB]
 	Target DB Endpoint:[create this first if not created][It is connected to source DB]
 
-	Selection rules:
-		Source Name: employees
+        Selection rules:
+	   Source Name: employees
 
 keep rest as per requirement and once filled click on 'create task'. 
 
-	-DMS traditionally moves smaller relational workloads(<10 TB).
+-DMS traditionally moves smaller relational workloads(<10 TB).
 
-	-AWS DMS supports ongoing replication to keep the tgt in sync with the source; 
+-AWS DMS supports ongoing replication to keep the tgt in sync with the source; 
 
 ### AWS Schema Conversion Tool
-	-Data migration is NOT just about taking backup of src db and upload in to tgt. In many cases we also have to change the overall schema of the db. Ex: lets say of src db is Oracle and we need to move it to RDS Postgre, we need to 1st do schema conversion with help of AWS Schema Conversion Tool(SCT) and then proceed with the migration including the converted schemas.
 
-	-Schema conversion tools: AWS offers 2 schema conversion solutions to make heterogenous db migrations predictable, fast, secure, and simple.
-	1. DMS Schema Conversion(Fully Managed).
-	2. AWS SCT software.
-		We need to go and download and install the SCT in our systems and use it to convert the schemas.
+-Data migration is NOT just about taking backup of src db and upload in to tgt. In many cases we also have to change the overall schema of the db. Ex: lets say of src db is Oracle and we need to move it to RDS Postgre, we need to 1st do schema conversion with help of AWS Schema Conversion Tool(SCT) and then proceed with the migration including the converted schemas.
 
-	-AWS SCT is primarily used to migrate large data warehouse workloads.
+-Schema conversion tools: AWS offers 2 schema conversion solutions to make heterogenous db migrations predictable, fast, secure, and simple.
+   1. DMS Schema Conversion(Fully Managed).
+   2. AWS SCT software.(We need to go and download and install the SCT in our systems and use it to convert the schemas.)
 
-	-SCT does not support replication.
+-AWS SCT is primarily used to migrate large data warehouse workloads.
 
-	-SCT can also run in offline mode.
+-SCT does not support replication.
 
--> DMS Migration Types
+ -SCT can also run in offline mode.
+
+#### DMS Migration Types
 
 -Migrate existing data - perform a one-time migration from source endpt to the tgt endpt.
 
 -Migrate existing data & replicate ongoing changes - perform a one-time migration from source endpt to the tgt endpt, and then continue replicating data changes from the source to the tgt.
 
-Replicate data changes only - dont perform a one-time migration, but continue to replicate data changes from the source to tgt.
+-Replicate data changes only - dont perform a one-time migration, but continue to replicate data changes from the source to tgt.
 
 -Imp note:
 1. Most engines require some additional configuration to make it possible for the capture process to consume the change data in a meaningful way, without data loss. Ex: Oracle requires the addition of supplemental logging, and MySQL requires row-level binary logging(bin logging).
@@ -1642,8 +1650,8 @@ Replicate data changes only - dont perform a one-time migration, but continue to
 AWS Outposts is a fully managed service that offers the same AWS infra, AWS service, APIs and tools to virtually any datacenter, co-location space, or on-premises facility.
 
 ### AWS DataSync
-	- AWS Datasync is an online data transfer service that simplifies, automates, and accelerates moving data between storage systems and services.
+- AWS Datasync is an online data transfer service that simplifies, automates, and accelerates moving data between storage systems and services.
 
-	-Datasync provides end-to-end security, including encryption, integrity validation to help ensure that your data arrives securely, intact and ready to use.
+-Datasync provides end-to-end security, including encryption, integrity validation to help ensure that your data arrives securely, intact and ready to use.
 
-	-Transferring the data between the on premise and a aws, there is a requirement of data sync agent.
+-Transferring the data between the on premise and a aws, there is a requirement of data sync agent.
