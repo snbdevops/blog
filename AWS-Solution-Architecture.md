@@ -1578,14 +1578,19 @@ keep rest as per requirement and once filled click on 'create task'.
 -Schema conversion tools: AWS offers 2 schema conversion solutions to make heterogenous db migrations predictable, fast, secure, and simple.
    1. DMS Schema Conversion(Fully Managed).
    2. AWS SCT software.(We need to go and download and install the SCT in our systems and use it to convert the schemas.)
+
 -AWS SCT is primarily used to migrate large data warehouse workloads.
+
 -SCT does not support replication.
+
 -SCT can also run in offline mode.
 
 ### DMS Migration Types
 
 -Migrate existing data - perform a one-time migration from source endpt to the tgt endpt.
+
 -Migrate existing data & replicate ongoing changes - perform a one-time migration from source endpt to the tgt endpt, and then continue replicating data changes from the source to the tgt.
+
 -Replicate data changes only - dont perform a one-time migration, but continue to replicate data changes from the source to tgt.
 
 -Imp note:
@@ -1599,5 +1604,7 @@ AWS Outposts is a fully managed service that offers the same AWS infra, AWS serv
 ### AWS DataSync
 
 -AWS Datasync is an online data transfer service that simplifies, automates, and accelerates moving data between storage systems and services.
+
 -Datasync provides end-to-end security, including encryption, integrity validation to help ensure that your data arrives securely, intact and ready to use.
+
 -Transferring the data between the on premise and a aws, there is a requirement of data sync agent.
