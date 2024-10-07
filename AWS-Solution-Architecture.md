@@ -1575,14 +1575,12 @@ There is a plugin which helps us to achieve this. When we right click on that we
 	4. Create an AMI
 
 ### Application Discovery Service
-	-AWS Application Discovery Service helps enterprise customer plan migration projects by gathering information about their on-prem data centers.
-	- For enterprises which has 100s to 1000s of servers on-prem, we get to know network dependency(it shows in a diagrammatic representation), right instance types for them can be, etc.
 
-	-It supports both agentless discovery and agent-based discovery.
-
-	-Agentless service needs installation of the discovery connector in VMware vCenter. 
-
-	-Agent-based service requires agent to be installed in OS.[with this we get network and dependencies diagrammatic representation].
+-AWS Application Discovery Service helps enterprise customer plan migration projects by gathering information about their on-prem data centers.
+-For enterprises which has 100s to 1000s of servers on-prem, we get to know network dependency(it shows in a diagrammatic representation), right instance types for them can be, etc.
+-It supports both agentless discovery and agent-based discovery.
+-Agentless service needs installation of the discovery connector in VMware vCenter. 
+-Agent-based service requires agent to be installed in OS.[with this we get network and dependencies diagrammatic representation].
 
 ### AWS DMS
 	-AWS DMS is a cloud service that makes it possible to migrate relational db, data warehouses, NoSQL db, and other types of data stores.
@@ -1590,9 +1588,9 @@ There is a plugin which helps us to achieve this. When we right click on that we
 	-We can use AWS DMS to migrate our data into the AWS cloud or between combinations of cloud and on-prem. setups.
 
                                   	      AWS DMS
-                                  	          |			                 {Replication Instance}		              |
+                                  	          |		       {Replication Instance}	            |
                                   Source DB --|-> Source Endpoint ---> [Replication task] ---> Tgt Endpt. --|-> Tgt DB
-                                  	          |								                                              |
+                                  	          |						            |
 
 	-At a basic level, AWS DMS is a server in the AWS Cloud that runs replication software. So we have the DMS server, it takes the data from on premise and it copies it to a specific target. And this is the reason why you create a source and a target connection to tell the DMS where to extract from and load to. So this specific DMS should be able to connect to both the database in the on premise as well as the target database.
 
