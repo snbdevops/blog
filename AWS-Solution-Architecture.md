@@ -1471,4 +1471,3 @@ AWS Outposts is a fully managed service that offers the same AWS infra, AWS serv
 -Datasync provides end-to-end security, including encryption, integrity validation to help ensure that your data arrives securely, intact and ready to use.
 
 -Transferring the data between the on premise and a aws, there is a requirement of data sync agent.
-
